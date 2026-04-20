@@ -30,13 +30,13 @@ export default function QuickView({ product, isOpen, onClose }: QuickViewProps) 
 
   const handleAddToCart = () => {
     addItem({
+      id: `${product.id}-${variant.title}-false`,
       productId: product.id,
       title: product.title,
       image: product.image,
-      variant: variant.size,
-      frame: 'none',
+      size: variant.title,
+      framed: false,
       price: price,
-      quantity: quantity,
     });
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 2000);
@@ -107,7 +107,7 @@ export default function QuickView({ product, isOpen, onClose }: QuickViewProps) 
                 <div className="flex flex-wrap gap-2">
                   {product.variants.map((v, index) => (
                     <button
-                      key={v.size}
+                      key={v.title}
                       onClick={() => setSelectedVariant(index)}
                       className={`px-4 py-2 text-sm border transition-all ${
                         selectedVariant === index
@@ -115,7 +115,7 @@ export default function QuickView({ product, isOpen, onClose }: QuickViewProps) 
                           : 'border-sand text-olive hover:border-charcoal'
                       }`}
                     >
-                      {v.size}
+                      {v.title}
                     </button>
                   ))}
                 </div>
