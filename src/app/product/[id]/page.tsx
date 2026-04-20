@@ -2,13 +2,14 @@
 
 import { useState, use, useEffect } from 'react';
 import Link from 'next/link';
-import { Minus, Plus, Check, ShoppingBag, Heart, Maximize2 } from 'lucide-react';
+import { Minus, Plus, Check, ShoppingBag, Heart, Maximize2, Camera } from 'lucide-react';
 import { useCartStore } from '@/store/cart';
 import { useWishlistStore } from '@/store/wishlist';
 import { useRecentlyViewedStore } from '@/store/recentlyViewed';
 import { getProductById } from '@/lib/products';
 import FramePreview, { FrameStyle } from '@/components/FramePreview';
 import RoomShowroom from '@/components/RoomShowroom';
+import ARWallViewer from '@/components/ARWallViewer';
 import RelatedProducts from '@/components/RelatedProducts';
 import RecentlyViewed from '@/components/RecentlyViewed';
 
@@ -29,6 +30,7 @@ export default function ProductPage({ params }: PageProps) {
   const [selectedFrame, setSelectedFrame] = useState<FrameStyle>('none');
   const [quantity, setQuantity] = useState(1);
   const [showShowroom, setShowShowroom] = useState(false);
+  const [showAR, setShowAR] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const addItem = useCartStore((state) => state.addItem);
   const { toggleItem, isInWishlist } = useWishlistStore();
@@ -273,14 +275,23 @@ export default function ProductPage({ params }: PageProps) {
                   </button>
                 </div>
 
-                {/* View in Room button */}
-                <button
-                  onClick={() => setShowShowroom(true)}
-                  className="w-full py-3 border border-sand text-olive hover:border-charcoal hover:text-charcoal text-sm tracking-wide transition-all flex items-center justify-center gap-2"
-                >
-                  <Maximize2 className="w-4 h-4" />
-                  Se hvordan den ser ud i dit hjem
-                </button>
+                {/* View in Room buttons */}
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setShowShowroom(true)}
+                    className="flex-1 py-3 border border-sand text-olive hover:border-charcoal hover:text-charcoal text-sm tracking-wide transition-all flex items-center justify-center gap-2"
+                  >
+                    <Maximize2 className="w-4 h-4" />
+                    Se på væg
+                  </button>
+                  <button
+                    onClick={() => setShowAR(true)}
+                    className="flex-1 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm tracking-wide transition-all flex items-center justify-center gap-2 hover:from-blue-700 hover:to-purple-700"
+                  >
+                    <Camera className="w-4 h-4" />
+                    Prøv i dit rum (AR)
+                  </button>
+                </div>
               </div>
 
               {/* Trust badges */}
@@ -320,6 +331,15 @@ export default function ProductPage({ params }: PageProps) {
         productTitle={product.title}
         isOpen={showShowroom}
         onClose={() => setShowShowroom(false)}
+        frameStyle={selectedFrame as 'none' | 'black' | 'white' | 'oak'}
+      />
+
+      {/* AR Wall Viewer */}
+      <ARWallViewer
+        imageSrc={product.image}
+        productTitle={product.title}
+        isOpen={showAR}
+        onClose={() => setShowAR(false)}
         frameStyle={selectedFrame as 'none' | 'black' | 'white' | 'oak'}
       />
     </>
