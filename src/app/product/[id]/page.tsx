@@ -107,14 +107,6 @@ export default function ProductPage({ params }: PageProps) {
                       frameStyle={selectedFrame}
                       className="w-full h-full"
                     />
-                    {/* View in Room button - always visible */}
-                    <button
-                      onClick={() => setShowShowroom(true)}
-                      className="absolute bottom-4 right-4 flex items-center gap-2 px-5 py-3 bg-charcoal hover:bg-olive text-cream text-sm font-medium tracking-wide rounded-sm shadow-lg transition-all duration-300 hover:scale-105"
-                    >
-                      <Maximize2 className="w-4 h-4" />
-                      Se i rum
-                    </button>
                   </>
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-olive/30">
@@ -123,19 +115,10 @@ export default function ProductPage({ params }: PageProps) {
                 )}
               </div>
 
-              {/* Size guide hint + View in room button for mobile */}
-              <div className="flex items-center justify-between">
-                <p className="text-xs text-olive">
-                  {variant.title}
-                </p>
-                <button
-                  onClick={() => setShowShowroom(true)}
-                  className="flex items-center gap-1.5 text-xs text-charcoal hover:text-olive transition-colors"
-                >
-                  <Maximize2 className="w-3.5 h-3.5" />
-                  Se i rum
-                </button>
-              </div>
+              {/* Size indicator */}
+              <p className="text-xs text-olive text-center">
+                {variant.title}
+              </p>
             </div>
 
             {/* Details */}
@@ -289,6 +272,15 @@ export default function ProductPage({ params }: PageProps) {
                     <Heart className={`w-5 h-5 ${inWishlist ? 'fill-current' : ''}`} />
                   </button>
                 </div>
+
+                {/* View in Room button */}
+                <button
+                  onClick={() => setShowShowroom(true)}
+                  className="w-full py-3 border border-sand text-olive hover:border-charcoal hover:text-charcoal text-sm tracking-wide transition-all flex items-center justify-center gap-2"
+                >
+                  <Maximize2 className="w-4 h-4" />
+                  Se hvordan den ser ud i dit hjem
+                </button>
               </div>
 
               {/* Trust badges */}
