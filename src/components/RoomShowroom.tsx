@@ -12,61 +12,60 @@ interface RoomShowroomProps {
   frameStyle?: 'none' | 'black' | 'white' | 'oak';
 }
 
-// Professional mockup scenes - each with specific artwork placement coordinates
-// Using high-quality Unsplash room images with precisely defined frame areas
+// Professional mockup scenes - using images with clear, front-facing walls
+// Each image carefully selected to have a natural artwork placement area
 const scenes = [
   {
-    id: 'modern-living',
-    name: 'Moderne stue',
-    // Light living room with sofa - artwork centered above
-    backgroundImage: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1600&q=90',
-    // Frame position as percentage of image dimensions
+    id: 'white-sofa',
+    name: 'Hvid stue',
+    // White wall with sofa - clear wall space above
+    backgroundImage: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1600&q=90',
+    frame: { top: 5, left: 33, width: 34, height: 42 },
+    shadowColor: 'rgba(0,0,0,0.12)',
+    wallTone: 'light',
+  },
+  {
+    id: 'minimal-bedroom',
+    name: 'Minimalistisk soveværelse',
+    // Clean bedroom with white wall behind bed
+    backgroundImage: 'https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?w=1600&q=90',
     frame: { top: 8, left: 35, width: 30, height: 38 },
     shadowColor: 'rgba(0,0,0,0.15)',
     wallTone: 'light',
   },
   {
-    id: 'minimalist-white',
-    name: 'Hvid minimalistisk',
-    // Clean white wall with minimal furniture
-    backgroundImage: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1600&q=90',
-    frame: { top: 12, left: 32, width: 36, height: 45 },
-    shadowColor: 'rgba(0,0,0,0.12)',
+    id: 'scandi-living',
+    name: 'Skandinavisk stue',
+    // Scandinavian living room with clear wall
+    backgroundImage: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=1600&q=90',
+    frame: { top: 10, left: 30, width: 40, height: 50 },
+    shadowColor: 'rgba(0,0,0,0.1)',
     wallTone: 'light',
   },
   {
-    id: 'scandinavian',
-    name: 'Skandinavisk',
-    // Scandinavian style room with light wood
-    backgroundImage: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&q=90',
-    frame: { top: 10, left: 28, width: 28, height: 36 },
+    id: 'cozy-corner',
+    name: 'Hyggehjørne',
+    // Cozy reading corner with wall space
+    backgroundImage: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=1600&q=90',
+    frame: { top: 6, left: 32, width: 36, height: 45 },
     shadowColor: 'rgba(0,0,0,0.18)',
     wallTone: 'light',
   },
   {
-    id: 'cozy-bedroom',
-    name: 'Hyggeligt soveværelse',
-    // Bedroom with neutral tones
-    backgroundImage: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1600&q=90',
-    frame: { top: 8, left: 38, width: 24, height: 32 },
-    shadowColor: 'rgba(0,0,0,0.2)',
-    wallTone: 'light',
-  },
-  {
-    id: 'dark-elegant',
+    id: 'dark-moody',
     name: 'Mørk elegant',
-    // Dark moody room
-    backgroundImage: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=90',
-    frame: { top: 15, left: 30, width: 32, height: 40 },
-    shadowColor: 'rgba(0,0,0,0.35)',
+    // Dark wall living room
+    backgroundImage: 'https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?w=1600&q=90',
+    frame: { top: 8, left: 33, width: 34, height: 42 },
+    shadowColor: 'rgba(0,0,0,0.4)',
     wallTone: 'dark',
   },
   {
-    id: 'warm-living',
-    name: 'Varm atmosfære',
-    // Warm toned living space
-    backgroundImage: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1600&q=90',
-    frame: { top: 6, left: 34, width: 32, height: 40 },
+    id: 'warm-neutral',
+    name: 'Varm neutral',
+    // Warm beige/neutral living space
+    backgroundImage: 'https://images.unsplash.com/photo-1615529182904-14819c35db37?w=1600&q=90',
+    frame: { top: 5, left: 30, width: 40, height: 50 },
     shadowColor: 'rgba(0,0,0,0.15)',
     wallTone: 'light',
   },
