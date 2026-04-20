@@ -2,12 +2,13 @@
 
 import { useState, use, useEffect } from 'react';
 import Link from 'next/link';
-import { Minus, Plus, Check, ShoppingBag, Heart } from 'lucide-react';
+import { Minus, Plus, Check, ShoppingBag, Heart, Maximize2 } from 'lucide-react';
 import { useCartStore } from '@/store/cart';
 import { useWishlistStore } from '@/store/wishlist';
 import { useRecentlyViewedStore } from '@/store/recentlyViewed';
 import { getProductById } from '@/lib/products';
 import FramePreview, { FrameStyle } from '@/components/FramePreview';
+import RoomShowroom from '@/components/RoomShowroom';
 import RelatedProducts from '@/components/RelatedProducts';
 import RecentlyViewed from '@/components/RecentlyViewed';
 
@@ -27,7 +28,7 @@ export default function ProductPage({ params }: PageProps) {
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [selectedFrame, setSelectedFrame] = useState<FrameStyle>('none');
   const [quantity, setQuantity] = useState(1);
-  // const [showShowroom, setShowShowroom] = useState(false); // temporarily disabled
+  const [showShowroom, setShowShowroom] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const addItem = useCartStore((state) => state.addItem);
   const { toggleItem, isInWishlist } = useWishlistStore();
@@ -106,7 +107,14 @@ export default function ProductPage({ params }: PageProps) {
                       frameStyle={selectedFrame}
                       className="w-full h-full"
                     />
-{/* View in room button - temporarily disabled */}
+                    {/* View in Room button */}
+                    <button
+                      onClick={() => setShowShowroom(true)}
+                      className="absolute bottom-4 right-4 flex items-center gap-2 px-4 py-2.5 bg-white/95 hover:bg-white text-charcoal text-sm tracking-wide rounded-sm shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-105"
+                    >
+                      <Maximize2 className="w-4 h-4" />
+                      Se i rum
+                    </button>
                   </>
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-olive/30">
@@ -115,10 +123,19 @@ export default function ProductPage({ params }: PageProps) {
                 )}
               </div>
 
-              {/* Size guide hint */}
-              <p className="text-xs text-olive text-center">
-                {variant.title} • Click &quot;View in Room&quot; to see how it looks in your space
-              </p>
+              {/* Size guide hint + View in room button for mobile */}
+              <div className="flex items-center justify-between">
+                <p className="text-xs text-olive">
+                  {variant.title}
+                </p>
+                <button
+                  onClick={() => setShowShowroom(true)}
+                  className="flex items-center gap-1.5 text-xs text-charcoal hover:text-olive transition-colors"
+                >
+                  <Maximize2 className="w-3.5 h-3.5" />
+                  Se i rum
+                </button>
+              </div>
             </div>
 
             {/* Details */}
@@ -304,6 +321,15 @@ export default function ProductPage({ params }: PageProps) {
 
       {/* Recently Viewed */}
       <RecentlyViewed excludeProductId={product.id} />
+
+      {/* Room Showroom Modal */}
+      <RoomShowroom
+        imageSrc={product.image}
+        productTitle={product.title}
+        isOpen={showShowroom}
+        onClose={() => setShowShowroom(false)}
+        frameStyle={selectedFrame as 'none' | 'black' | 'white' | 'oak'}
+      />
     </>
   );
 }
