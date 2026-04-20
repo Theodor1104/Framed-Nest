@@ -107,10 +107,10 @@ export default function ProductPage({ params }: PageProps) {
                       frameStyle={selectedFrame}
                       className="w-full h-full"
                     />
-                    {/* View in Room button */}
+                    {/* View in Room button - always visible */}
                     <button
                       onClick={() => setShowShowroom(true)}
-                      className="absolute bottom-4 right-4 flex items-center gap-2 px-4 py-2.5 bg-white/95 hover:bg-white text-charcoal text-sm tracking-wide rounded-sm shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-105"
+                      className="absolute bottom-4 right-4 flex items-center gap-2 px-5 py-3 bg-charcoal hover:bg-olive text-cream text-sm font-medium tracking-wide rounded-sm shadow-lg transition-all duration-300 hover:scale-105"
                     >
                       <Maximize2 className="w-4 h-4" />
                       Se i rum
