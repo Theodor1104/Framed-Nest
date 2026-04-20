@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { X, Camera, RotateCcw, Move, ZoomIn, ZoomOut } from 'lucide-react';
-import * as THREE from 'three';
+import { X, Camera, ZoomIn, ZoomOut, Move } from 'lucide-react';
+import Image from 'next/image';
 
 interface ARWallViewerProps {
   imageSrc: string;
@@ -12,437 +12,273 @@ interface ARWallViewerProps {
   frameStyle?: 'none' | 'black' | 'white' | 'oak';
 }
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// WebXR types - using any for browser compatibility
-type XRSession = any;
-type XRReferenceSpace = any;
-type XRHitTestSource = any;
-type XRFrame = any;
-
 export default function ARWallViewer({ imageSrc, productTitle, isOpen, onClose, frameStyle = 'none' }: ARWallViewerProps) {
-  const [arSupported, setArSupported] = useState<boolean | null>(null);
-  const [arActive, setArActive] = useState(false);
+  const [cameraActive, setCameraActive] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [placed, setPlaced] = useState(false);
-  const [scale, setScale] = useState(1);
+  const [scale, setScale] = useState(0.4);
+  const [position, setPosition] = useState({ x: 50, y: 40 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const streamRef = useRef<MediaStream | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const sessionRef = useRef<XRSession | null>(null);
-  const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
-  const posterRef = useRef<THREE.Mesh | null>(null);
-  const reticleRef = useRef<THREE.Mesh | null>(null);
-  const hitTestSourceRef = useRef<XRHitTestSource | null>(null);
-  const localSpaceRef = useRef<XRReferenceSpace | null>(null);
 
-  // Check WebXR support
-  useEffect(() => {
-    const checkSupport = async () => {
-      if (navigator.xr) {
-        try {
-          const supported = await navigator.xr.isSessionSupported('immersive-ar');
-          setArSupported(supported);
-        } catch {
-          setArSupported(false);
-        }
-      } else {
-        setArSupported(false);
-      }
-    };
-    checkSupport();
-  }, []);
+  const hasFrame = frameStyle !== 'none';
 
-  // Load poster texture
-  const loadPosterTexture = useCallback((): Promise<THREE.Texture> => {
-    return new Promise((resolve, reject) => {
-      const textureLoader = new THREE.TextureLoader();
-      textureLoader.crossOrigin = 'anonymous';
-      textureLoader.load(
-        imageSrc,
-        (texture) => {
-          texture.colorSpace = THREE.SRGBColorSpace;
-          resolve(texture);
-        },
-        undefined,
-        reject
-      );
-    });
-  }, [imageSrc]);
-
-  // Create poster mesh with frame
-  const createPosterMesh = useCallback(async () => {
-    const texture = await loadPosterTexture();
-
-    // Poster dimensions (in meters) - approximately A2 size
-    const posterWidth = 0.42;
-    const posterHeight = 0.594;
-    const frameWidth = frameStyle !== 'none' ? 0.03 : 0;
-
-    const group = new THREE.Group();
-
-    // Frame (if selected)
-    if (frameStyle !== 'none') {
-      const frameColor = frameStyle === 'oak' ? 0x8B5A2B : frameStyle === 'white' ? 0xF5F5F5 : 0x1A1A1A;
-      const frameMaterial = new THREE.MeshStandardMaterial({
-        color: frameColor,
-        roughness: frameStyle === 'oak' ? 0.8 : 0.3,
-        metalness: 0.1
-      });
-
-      // Frame sides
-      const frameDepth = 0.02;
-      const totalWidth = posterWidth + frameWidth * 2;
-      const totalHeight = posterHeight + frameWidth * 2;
-
-      // Top
-      const topFrame = new THREE.Mesh(
-        new THREE.BoxGeometry(totalWidth, frameWidth, frameDepth),
-        frameMaterial
-      );
-      topFrame.position.set(0, posterHeight / 2 + frameWidth / 2, frameDepth / 2);
-      group.add(topFrame);
-
-      // Bottom
-      const bottomFrame = new THREE.Mesh(
-        new THREE.BoxGeometry(totalWidth, frameWidth, frameDepth),
-        frameMaterial
-      );
-      bottomFrame.position.set(0, -posterHeight / 2 - frameWidth / 2, frameDepth / 2);
-      group.add(bottomFrame);
-
-      // Left
-      const leftFrame = new THREE.Mesh(
-        new THREE.BoxGeometry(frameWidth, posterHeight, frameDepth),
-        frameMaterial
-      );
-      leftFrame.position.set(-posterWidth / 2 - frameWidth / 2, 0, frameDepth / 2);
-      group.add(leftFrame);
-
-      // Right
-      const rightFrame = new THREE.Mesh(
-        new THREE.BoxGeometry(frameWidth, posterHeight, frameDepth),
-        frameMaterial
-      );
-      rightFrame.position.set(posterWidth / 2 + frameWidth / 2, 0, frameDepth / 2);
-      group.add(rightFrame);
-    }
-
-    // White passepartout
-    const matGeometry = new THREE.PlaneGeometry(posterWidth, posterHeight);
-    const matMaterial = new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: 0.9 });
-    const mat = new THREE.Mesh(matGeometry, matMaterial);
-    mat.position.z = 0.001;
-    group.add(mat);
-
-    // Poster image
-    const imageWidth = posterWidth * 0.85;
-    const imageHeight = posterHeight * 0.85;
-    const posterGeometry = new THREE.PlaneGeometry(imageWidth, imageHeight);
-    const posterMaterial = new THREE.MeshStandardMaterial({
-      map: texture,
-      roughness: 0.5
-    });
-    const poster = new THREE.Mesh(posterGeometry, posterMaterial);
-    poster.position.z = 0.002;
-    group.add(poster);
-
-    return group;
-  }, [loadPosterTexture, frameStyle]);
-
-  // Start AR session
-  const startAR = async () => {
-    if (!navigator.xr || !canvasRef.current) {
-      setError('WebXR ikke tilgængelig');
-      return;
-    }
-
+  // Start camera
+  const startCamera = useCallback(async () => {
     try {
       setError(null);
-
-      // Initialize Three.js
-      const scene = new THREE.Scene();
-      sceneRef.current = scene;
-
-      const renderer = new THREE.WebGLRenderer({
-        canvas: canvasRef.current,
-        alpha: true,
-        antialias: true,
-      });
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.xr.enabled = true;
-      rendererRef.current = renderer;
-
-      // Add lighting
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-      scene.add(ambientLight);
-
-      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
-      directionalLight.position.set(0, 2, 1);
-      scene.add(directionalLight);
-
-      // Create reticle (placement indicator)
-      const reticleGeometry = new THREE.RingGeometry(0.1, 0.12, 32);
-      reticleGeometry.rotateX(-Math.PI / 2);
-      const reticleMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-      const reticle = new THREE.Mesh(reticleGeometry, reticleMaterial);
-      reticle.visible = false;
-      scene.add(reticle);
-      reticleRef.current = reticle;
-
-      // Create poster (initially hidden)
-      const posterMesh = await createPosterMesh();
-      posterMesh.visible = false;
-      scene.add(posterMesh);
-      posterRef.current = posterMesh as unknown as THREE.Mesh;
-
-      // Request AR session
-      const session = await navigator.xr.requestSession('immersive-ar', {
-        requiredFeatures: ['hit-test', 'local-floor'],
-        optionalFeatures: ['dom-overlay'],
-      });
-      sessionRef.current = session;
-
-      // Set up render state
-      const gl = renderer.getContext();
-      await renderer.xr.setSession(session);
-
-      // Get reference spaces
-      const referenceSpace = await session.requestReferenceSpace('local-floor');
-      localSpaceRef.current = referenceSpace;
-
-      const viewerSpace = await session.requestReferenceSpace('viewer');
-      if (session.requestHitTestSource) {
-        const hitTestSource = await session.requestHitTestSource({ space: viewerSpace });
-        hitTestSourceRef.current = hitTestSource;
-      }
-
-      setArActive(true);
-
-      // Render loop
-      const camera = new THREE.PerspectiveCamera();
-
-      const onXRFrame = (time: number, frame: XRFrame) => {
-        const session = frame.session;
-        session.requestAnimationFrame(onXRFrame);
-
-        const pose = frame.getViewerPose(referenceSpace);
-        if (!pose) return;
-
-        // Hit test for surface detection
-        if (hitTestSourceRef.current && reticleRef.current && !placed) {
-          const hitTestResults = frame.getHitTestResults(hitTestSourceRef.current);
-          if (hitTestResults.length > 0) {
-            const hit = hitTestResults[0];
-            const hitPose = hit.getPose(referenceSpace);
-            if (hitPose) {
-              reticleRef.current.visible = true;
-              reticleRef.current.matrix.fromArray(hitPose.transform.matrix);
-              reticleRef.current.matrix.decompose(
-                reticleRef.current.position,
-                reticleRef.current.quaternion,
-                reticleRef.current.scale
-              );
-            }
-          } else {
-            reticleRef.current.visible = false;
-          }
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: 'environment', // Back camera
+          width: { ideal: 1920 },
+          height: { ideal: 1080 }
         }
-
-        // Update camera from XR
-        const view = pose.views[0];
-        camera.matrix.fromArray(view.transform.matrix);
-        camera.projectionMatrix.fromArray(view.projectionMatrix);
-        camera.updateMatrixWorld(true);
-
-        renderer.render(scene, camera);
-      };
-
-      session.requestAnimationFrame(onXRFrame);
-
-      // Handle session end
-      session.addEventListener('end', () => {
-        setArActive(false);
-        setPlaced(false);
-        sessionRef.current = null;
       });
 
-    } catch (err) {
-      console.error('AR Error:', err);
-      setError('Kunne ikke starte AR. Sørg for at give kamera-tilladelse.');
-      setArActive(false);
-    }
-  };
+      streamRef.current = stream;
 
-  // Place poster at reticle position
-  const placePoster = () => {
-    if (reticleRef.current && posterRef.current && reticleRef.current.visible) {
-      posterRef.current.position.copy(reticleRef.current.position);
-      posterRef.current.position.y += 0.8; // Raise to wall height
-      posterRef.current.quaternion.copy(reticleRef.current.quaternion);
-      // Rotate to face viewer (stand upright on wall)
-      posterRef.current.rotateX(Math.PI / 2);
-      posterRef.current.visible = true;
-      posterRef.current.scale.setScalar(scale);
-      reticleRef.current.visible = false;
-      setPlaced(true);
-    }
-  };
-
-  // Reset placement
-  const resetPlacement = () => {
-    if (posterRef.current && reticleRef.current) {
-      posterRef.current.visible = false;
-      reticleRef.current.visible = true;
-      setPlaced(false);
-    }
-  };
-
-  // Adjust scale
-  const adjustScale = (delta: number) => {
-    const newScale = Math.max(0.5, Math.min(2, scale + delta));
-    setScale(newScale);
-    if (posterRef.current && placed) {
-      posterRef.current.scale.setScalar(newScale);
-    }
-  };
-
-  // Stop AR session
-  const stopAR = async () => {
-    if (sessionRef.current) {
-      await sessionRef.current.end();
-      sessionRef.current = null;
-    }
-    setArActive(false);
-    setPlaced(false);
-    onClose();
-  };
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (sessionRef.current) {
-        sessionRef.current.end();
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        await videoRef.current.play();
+        setCameraActive(true);
       }
-    };
+    } catch (err) {
+      console.error('Camera error:', err);
+      setError('Kunne ikke starte kamera. Giv venligst kamera-tilladelse.');
+    }
   }, []);
+
+  // Stop camera
+  const stopCamera = useCallback(() => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(track => track.stop());
+      streamRef.current = null;
+    }
+    setCameraActive(false);
+  }, []);
+
+  // Cleanup on close
+  useEffect(() => {
+    if (!isOpen) {
+      stopCamera();
+      setPosition({ x: 50, y: 40 });
+      setScale(0.4);
+    }
+  }, [isOpen, stopCamera]);
+
+  // Handle touch/mouse drag
+  const handleDragStart = (e: React.TouchEvent | React.MouseEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+
+    setDragStart({ x: clientX - position.x, y: clientY - position.y });
+  };
+
+  const handleDragMove = useCallback((e: TouchEvent | MouseEvent) => {
+    if (!isDragging || !containerRef.current) return;
+
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = ((clientX - rect.left) / rect.width) * 100;
+    const y = ((clientY - rect.top) / rect.height) * 100;
+
+    setPosition({
+      x: Math.max(10, Math.min(90, x)),
+      y: Math.max(10, Math.min(90, y))
+    });
+  }, [isDragging]);
+
+  const handleDragEnd = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  // Add global event listeners for drag
+  useEffect(() => {
+    if (isDragging) {
+      window.addEventListener('mousemove', handleDragMove);
+      window.addEventListener('mouseup', handleDragEnd);
+      window.addEventListener('touchmove', handleDragMove);
+      window.addEventListener('touchend', handleDragEnd);
+
+      return () => {
+        window.removeEventListener('mousemove', handleDragMove);
+        window.removeEventListener('mouseup', handleDragEnd);
+        window.removeEventListener('touchmove', handleDragMove);
+        window.removeEventListener('touchend', handleDragEnd);
+      };
+    }
+  }, [isDragging, handleDragMove, handleDragEnd]);
+
+  // Scale controls
+  const adjustScale = (delta: number) => {
+    setScale(prev => Math.max(0.2, Math.min(0.8, prev + delta)));
+  };
 
   if (!isOpen) return null;
 
-  // Fallback for unsupported devices
-  if (arSupported === false) {
-    return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95" onClick={onClose}>
-        <div className="bg-white rounded-xl p-6 max-w-md text-center" onClick={(e) => e.stopPropagation()}>
-          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Camera className="w-8 h-8 text-gray-400" />
-          </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">AR ikke tilgængelig</h3>
-          <p className="text-gray-600 mb-4">
-            Din enhed eller browser understøtter ikke AR-funktionen.
-            Prøv med en nyere smartphone og Chrome eller Safari browser.
-          </p>
-          <button
-            onClick={onClose}
-            className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
-          >
-            Luk
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div ref={containerRef} className="fixed inset-0 z-50 bg-black">
-      {/* AR Canvas */}
-      <canvas ref={canvasRef} className="w-full h-full" />
+    <div className="fixed inset-0 z-50 bg-black">
+      {/* Camera video feed */}
+      <div ref={containerRef} className="relative w-full h-full">
+        <video
+          ref={videoRef}
+          className="w-full h-full object-cover"
+          playsInline
+          muted
+        />
 
-      {/* UI Overlay */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Header */}
-        <div className="absolute top-0 left-0 right-0 p-4 flex items-center justify-between pointer-events-auto bg-gradient-to-b from-black/50 to-transparent">
-          <div className="text-white">
-            <h3 className="font-medium">{productTitle}</h3>
-            <p className="text-sm text-white/70">
-              {!arActive ? 'Tryk start for at åbne kamera' : placed ? 'Plakat placeret!' : 'Peg på en væg og tryk for at placere'}
-            </p>
-          </div>
-          <button
-            onClick={stopAR}
-            className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors"
+        {/* Poster overlay - only show when camera is active */}
+        {cameraActive && (
+          <div
+            className="absolute cursor-move touch-none select-none"
+            style={{
+              left: `${position.x}%`,
+              top: `${position.y}%`,
+              transform: 'translate(-50%, -50%)',
+              width: `${scale * 100}%`,
+              maxWidth: '80%',
+            }}
+            onMouseDown={handleDragStart}
+            onTouchStart={handleDragStart}
           >
-            <X className="w-6 h-6 text-white" />
-          </button>
-        </div>
-
-        {/* Error message */}
-        {error && (
-          <div className="absolute top-20 left-4 right-4 bg-red-500/90 text-white p-3 rounded-lg text-center">
-            {error}
-          </div>
-        )}
-
-        {/* Start button */}
-        {!arActive && !error && (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-auto">
-            <button
-              onClick={startAR}
-              className="px-8 py-4 bg-white text-gray-900 rounded-xl font-medium text-lg shadow-xl hover:bg-gray-100 transition-colors flex items-center gap-3"
-            >
-              <Camera className="w-6 h-6" />
-              Start AR Kamera
-            </button>
-          </div>
-        )}
-
-        {/* Controls when AR is active */}
-        {arActive && (
-          <div className="absolute bottom-8 left-0 right-0 flex flex-col items-center gap-4 pointer-events-auto">
-            {/* Scale controls */}
-            {placed && (
-              <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
-                <button
-                  onClick={() => adjustScale(-0.1)}
-                  className="p-2 hover:bg-white/20 rounded-full transition-colors"
-                >
-                  <ZoomOut className="w-5 h-5 text-white" />
-                </button>
-                <span className="text-white text-sm min-w-[60px] text-center">
-                  {Math.round(scale * 100)}%
-                </span>
-                <button
-                  onClick={() => adjustScale(0.1)}
-                  className="p-2 hover:bg-white/20 rounded-full transition-colors"
-                >
-                  <ZoomIn className="w-5 h-5 text-white" />
-                </button>
-              </div>
+            {/* Frame */}
+            {hasFrame && (
+              <div
+                className="absolute -inset-[6%] rounded-sm"
+                style={{
+                  background: frameStyle === 'oak'
+                    ? 'linear-gradient(145deg, #C4956A 0%, #8B5A2B 50%, #6B4423 100%)'
+                    : frameStyle === 'white'
+                    ? 'linear-gradient(145deg, #FFFFFF 0%, #F0F0F0 50%, #E5E5E5 100%)'
+                    : 'linear-gradient(145deg, #3D3D3D 0%, #1A1A1A 50%, #0D0D0D 100%)',
+                  boxShadow: '0 10px 40px rgba(0,0,0,0.4)',
+                }}
+              />
             )}
 
-            {/* Main action button */}
-            <div className="flex gap-4">
-              {placed ? (
-                <button
-                  onClick={resetPlacement}
-                  className="px-6 py-3 bg-white text-gray-900 rounded-xl font-medium shadow-xl flex items-center gap-2"
-                >
-                  <RotateCcw className="w-5 h-5" />
-                  Flyt plakat
-                </button>
-              ) : (
-                <button
-                  onClick={placePoster}
-                  className="px-8 py-4 bg-white text-gray-900 rounded-xl font-medium text-lg shadow-xl flex items-center gap-2"
-                >
-                  <Move className="w-5 h-5" />
-                  Placer her
-                </button>
-              )}
+            {/* White mat/passepartout */}
+            <div
+              className="relative bg-white aspect-[3/4]"
+              style={{
+                boxShadow: hasFrame ? 'inset 0 0 0 1px rgba(0,0,0,0.1)' : '0 10px 40px rgba(0,0,0,0.4)',
+              }}
+            >
+              {/* The actual artwork */}
+              <div className="absolute inset-[6%]">
+                <Image
+                  src={imageSrc}
+                  alt={productTitle}
+                  fill
+                  className="object-cover pointer-events-none"
+                  sizes="50vw"
+                  draggable={false}
+                />
+              </div>
+            </div>
+
+            {/* Drag indicator */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className={`p-3 rounded-full bg-black/50 backdrop-blur-sm transition-opacity ${isDragging ? 'opacity-100' : 'opacity-0'}`}>
+                <Move className="w-6 h-6 text-white" />
+              </div>
             </div>
           </div>
         )}
+
+        {/* UI Overlay */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Header */}
+          <div className="absolute top-0 left-0 right-0 p-4 flex items-center justify-between pointer-events-auto bg-gradient-to-b from-black/60 to-transparent">
+            <div className="text-white">
+              <h3 className="font-medium text-lg">{productTitle}</h3>
+              <p className="text-sm text-white/80">
+                {!cameraActive ? 'Tryk for at åbne kameraet' : 'Træk billedet til din væg'}
+              </p>
+            </div>
+            <button
+              onClick={() => { stopCamera(); onClose(); }}
+              className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors"
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
+          </div>
+
+          {/* Error message */}
+          {error && (
+            <div className="absolute top-24 left-4 right-4 bg-red-500/90 text-white p-4 rounded-xl text-center pointer-events-auto">
+              {error}
+              <button
+                onClick={() => setError(null)}
+                className="block w-full mt-2 text-sm underline"
+              >
+                Luk
+              </button>
+            </div>
+          )}
+
+          {/* Start button - shown when camera is not active */}
+          {!cameraActive && !error && (
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-auto bg-black/80">
+              <div className="text-center">
+                <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-white/10 flex items-center justify-center">
+                  <Camera className="w-12 h-12 text-white" />
+                </div>
+                <h3 className="text-white text-xl font-medium mb-2">Se plakaten i dit rum</h3>
+                <p className="text-white/70 mb-6 max-w-xs mx-auto">
+                  Brug dit kamera til at se hvordan plakaten vil se ud på din væg
+                </p>
+                <button
+                  onClick={startCamera}
+                  className="px-8 py-4 bg-white text-gray-900 rounded-xl font-medium text-lg shadow-xl hover:bg-gray-100 transition-colors flex items-center gap-3 mx-auto"
+                >
+                  <Camera className="w-6 h-6" />
+                  Start Kamera
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Controls when camera is active */}
+          {cameraActive && (
+            <div className="absolute bottom-8 left-0 right-0 flex flex-col items-center gap-4 pointer-events-auto">
+              {/* Instructions */}
+              <div className="bg-black/50 backdrop-blur-sm rounded-full px-4 py-2 text-white text-sm">
+                Træk billedet • Brug knapperne for at ændre størrelse
+              </div>
+
+              {/* Scale controls */}
+              <div className="flex items-center gap-4 bg-white/95 backdrop-blur-sm rounded-full px-6 py-3 shadow-xl">
+                <button
+                  onClick={() => adjustScale(-0.05)}
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  aria-label="Mindre"
+                >
+                  <ZoomOut className="w-6 h-6 text-gray-700" />
+                </button>
+
+                <span className="text-gray-700 font-medium min-w-[50px] text-center">
+                  {Math.round(scale * 250)}%
+                </span>
+
+                <button
+                  onClick={() => adjustScale(0.05)}
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  aria-label="Større"
+                >
+                  <ZoomIn className="w-6 h-6 text-gray-700" />
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
