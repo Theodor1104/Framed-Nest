@@ -2,78 +2,78 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Mail } from 'lucide-react';
 
 const faqs = [
   {
-    category: 'Orders & Shipping',
+    category: 'Bestilling & Levering',
     questions: [
       {
-        q: 'How long does shipping take?',
-        a: 'Orders are typically delivered within 5-7 business days. Your prints are produced on demand and shipped directly from our print partner in Europe.',
+        q: 'Hvor lang tid tager levering?',
+        a: 'Ordrer leveres typisk inden for 5-7 hverdage. Dine prints produceres on-demand og sendes direkte fra vores printpartner i Europa.',
       },
       {
-        q: 'Do you ship internationally?',
-        a: 'Yes, we ship to most European countries. Shipping costs vary by location and are calculated at checkout.',
+        q: 'Leverer I internationalt?',
+        a: 'Ja, vi sender til de fleste europæiske lande. Forsendelsesomkostninger varierer efter lokation og beregnes ved checkout.',
       },
       {
-        q: 'Is shipping free?',
-        a: 'Yes! We offer free shipping on all orders over 499 kr. Orders under this amount have a flat shipping rate of 39 kr.',
+        q: 'Er fragt gratis?',
+        a: 'Ja! Vi tilbyder gratis fragt på alle ordrer over 499 kr. Ordrer under dette beløb har en fast fragtpris på 39 kr.',
       },
       {
-        q: 'Can I track my order?',
-        a: 'Absolutely. Once your order ships, you will receive an email with tracking information so you can follow your package every step of the way.',
+        q: 'Kan jeg spore min ordre?',
+        a: 'Absolut. Når din ordre afsendes, modtager du en email med tracking-information, så du kan følge din pakke hele vejen.',
       },
     ],
   },
   {
-    category: 'Products & Quality',
+    category: 'Produkter & Kvalitet',
     questions: [
       {
-        q: 'What paper do you use?',
-        a: 'All our prints are produced on premium 200gsm matte paper with a subtle texture that gives each piece a gallery-quality finish. The paper is FSC certified and acid-free for longevity.',
+        q: 'Hvilket papir bruger I?',
+        a: 'Alle vores prints produceres på premium 200gsm mat papir med en subtil tekstur, der giver hvert stykke en galleri-kvalitet finish. Papiret er FSC-certificeret og syrefrit for lang holdbarhed.',
       },
       {
-        q: 'What sizes are available?',
-        a: 'We offer four standard sizes: 21x30cm (A4), 30x40cm, 50x70cm, and 70x100cm. These sizes fit standard frames available at most home stores.',
+        q: 'Hvilke størrelser findes?',
+        a: 'Vi tilbyder fire standardstørrelser: 21x30cm (A4), 30x40cm, 50x70cm og 70x100cm. Disse størrelser passer til standardrammer fra de fleste boligbutikker.',
       },
       {
-        q: 'Do prints come framed?',
-        a: 'Prints are sold unframed by default. We offer optional premium oak frames for an additional cost. Frames are made from sustainably sourced wood with a clean, modern profile.',
+        q: 'Kommer prints med ramme?',
+        a: 'Prints sælges som standard uden ramme. Vi tilbyder valgfri premium egetræsrammer mod et tillæg. Rammerne er lavet af bæredygtigt træ med en ren, moderne profil.',
       },
       {
-        q: 'Are the colors accurate to what I see online?',
-        a: 'We calibrate our prints carefully to match the digital previews. However, slight variations may occur due to differences in screen settings and lighting conditions.',
+        q: 'Er farverne præcise i forhold til det jeg ser online?',
+        a: 'Vi kalibrerer vores prints omhyggeligt for at matche de digitale previews. Dog kan små variationer forekomme på grund af forskelle i skærmindstillinger og lysforhold.',
       },
     ],
   },
   {
-    category: 'Returns & Refunds',
+    category: 'Returnering & Refundering',
     questions: [
       {
-        q: 'What is your return policy?',
-        a: 'We offer a 14-day return policy for unopened items in original packaging. Since prints are made to order, we cannot accept returns on opened or used items unless they arrive damaged.',
+        q: 'Hvad er jeres returpolitik?',
+        a: 'Vi tilbyder 14 dages returret på uåbnede varer i original emballage. Da prints produceres på bestilling, kan vi ikke acceptere returneringer af åbnede eller brugte varer, medmindre de ankommer beskadiget.',
       },
       {
-        q: 'What if my print arrives damaged?',
-        a: 'Contact us within 48 hours of delivery with photos of the damage. We will send a replacement at no extra cost.',
+        q: 'Hvad hvis mit print ankommer beskadiget?',
+        a: 'Kontakt os inden for 48 timer efter levering med fotos af skaden. Vi sender en erstatning uden ekstra omkostninger.',
       },
       {
-        q: 'How do I request a refund?',
-        a: 'Email us at hello@framednest.com with your order number and reason for the refund. We process refunds within 5-7 business days.',
+        q: 'Hvordan anmoder jeg om refundering?',
+        a: 'Send os en email på hello@framednest.dk med dit ordrenummer og årsagen til refunderingen. Vi behandler refunderinger inden for 5-7 hverdage.',
       },
     ],
   },
   {
-    category: 'Payment',
+    category: 'Betaling',
     questions: [
       {
-        q: 'What payment methods do you accept?',
-        a: 'We accept all major credit cards (Visa, Mastercard, American Express) as well as Apple Pay and Google Pay. All payments are processed securely through Stripe.',
+        q: 'Hvilke betalingsmetoder accepterer I?',
+        a: 'Vi accepterer alle større kreditkort (Visa, Mastercard, American Express) samt MobilePay, Apple Pay og Google Pay. Alle betalinger behandles sikkert gennem Stripe.',
       },
       {
-        q: 'Is my payment information secure?',
-        a: 'Yes, we use Stripe for payment processing, which is PCI DSS Level 1 certified - the highest level of security certification available.',
+        q: 'Er mine betalingsoplysninger sikre?',
+        a: 'Ja, vi bruger Stripe til betalingsbehandling, som er PCI DSS Level 1 certificeret - det højeste niveau af sikkerhedscertificering tilgængeligt.',
       },
     ],
   },
@@ -83,49 +83,52 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-sand/50">
+    <div className="border-b border-sand/30 last:border-b-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-4 flex justify-between items-center text-left"
+        className="w-full py-5 flex justify-between items-center text-left group"
       >
-        <span className="text-charcoal font-medium pr-4">{question}</span>
+        <span className="text-charcoal pr-4 group-hover:text-olive transition-colors">{question}</span>
         <ChevronDown
-          className={`w-5 h-5 text-olive flex-shrink-0 transition-transform ${
+          className={`w-5 h-5 text-olive flex-shrink-0 transition-transform duration-300 ${
             isOpen ? 'rotate-180' : ''
           }`}
         />
       </button>
-      {isOpen && (
-        <div className="pb-4 pr-8">
-          <p className="text-olive leading-relaxed">{answer}</p>
-        </div>
-      )}
+      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 pb-5' : 'max-h-0'}`}>
+        <p className="text-olive leading-relaxed pr-8">{answer}</p>
+      </div>
     </div>
   );
 }
 
 export default function FAQPage() {
   return (
-    <div className="py-12 sm:py-16">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-3xl sm:text-4xl font-light tracking-wide text-charcoal mb-4">
-            Frequently Asked Questions
+    <div>
+      {/* Hero Header */}
+      <div className="relative py-20 sm:py-28 bg-sand/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-sm uppercase tracking-[0.3em] text-olive mb-4">
+            Support
+          </p>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tight text-charcoal mb-6">
+            Ofte Stillede Spørgsmål
           </h1>
-          <p className="text-olive">
-            Find answers to common questions about orders, shipping, and our products.
+          <p className="text-lg text-olive max-w-2xl mx-auto font-light">
+            Find svar på de mest almindelige spørgsmål om bestilling, levering og vores produkter.
           </p>
         </div>
+      </div>
 
-        {/* FAQ Sections */}
-        <div className="space-y-10">
+      {/* FAQ Content */}
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div className="space-y-12">
           {faqs.map((section) => (
             <div key={section.category}>
-              <h2 className="text-lg font-medium text-charcoal mb-4">
+              <h2 className="text-sm uppercase tracking-[0.2em] text-olive mb-6">
                 {section.category}
               </h2>
-              <div className="bg-sand/10">
+              <div className="bg-white border border-sand/30 px-6">
                 {section.questions.map((item) => (
                   <FAQItem key={item.q} question={item.q} answer={item.a} />
                 ))}
@@ -135,19 +138,22 @@ export default function FAQPage() {
         </div>
 
         {/* Still have questions */}
-        <div className="mt-16 text-center p-8 bg-sand/20">
-          <h2 className="text-xl font-light text-charcoal mb-2">
-            Still have questions?
+        <div className="mt-20 text-center">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-sand/30 mb-6">
+            <Mail className="w-7 h-7 text-olive" />
+          </div>
+          <h2 className="text-2xl font-light text-charcoal mb-3">
+            Har du stadig spørgsmål?
           </h2>
-          <p className="text-olive mb-6">
-            We are here to help. Reach out and we will get back to you within 24 hours.
+          <p className="text-olive mb-8 font-light max-w-md mx-auto">
+            Vi er her for at hjælpe. Skriv til os, og vi vender tilbage inden for 24 timer.
           </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center px-6 py-3 bg-charcoal text-cream text-sm tracking-wide hover:bg-olive transition-colors"
+          <a
+            href="mailto:hello@framednest.dk"
+            className="inline-flex items-center px-8 py-4 bg-charcoal text-cream text-sm tracking-widest uppercase hover:bg-olive transition-all duration-300"
           >
-            Contact Us
-          </Link>
+            Kontakt Os
+          </a>
         </div>
       </div>
     </div>
