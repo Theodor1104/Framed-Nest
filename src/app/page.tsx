@@ -21,51 +21,44 @@ const collectionsInfo = [
 export default function Home() {
   return (
     <div>
-      {/* Hero Section - Full screen with dramatic imagery */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/grecian-arches.jpg"
-            alt="Framed Nest - Premium Art Prints"
-            fill
-            className="object-cover scale-105"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-cream/40 via-cream/60 to-cream" />
-        </div>
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <p className="text-sm uppercase tracking-[0.3em] text-olive mb-6 animate-fade-in">
-            Premium Art Prints
-          </p>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-light tracking-tight text-charcoal mb-8">
-            Art that feels
-            <br />
-            <span className="italic">like home</span>
-          </h1>
-          <p className="text-lg sm:text-xl text-olive mb-10 font-light max-w-xl mx-auto">
-            Curated prints for those who believe their walls deserve more than ordinary
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/shop"
-              className="group inline-flex items-center px-10 py-4 bg-charcoal text-cream text-sm tracking-widest uppercase hover:bg-olive transition-all duration-300"
-            >
-              Explore Collection
-              <ArrowRight className="ml-3 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/collections"
-              className="inline-flex items-center px-10 py-4 border border-charcoal text-charcoal text-sm tracking-widest uppercase hover:bg-charcoal hover:text-cream transition-all duration-300"
-            >
-              View Collections
-            </Link>
-          </div>
-        </div>
+      {/* Hero Section - Clean minimal design */}
+      <section className="relative min-h-[90vh] flex items-center justify-center bg-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Text content */}
+            <div className="text-center lg:text-left order-2 lg:order-1">
+              <p className="text-sm uppercase tracking-[0.3em] text-olive mb-6">
+                Premium Art Prints
+              </p>
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-light tracking-tight text-charcoal mb-8">
+                Art that feels
+                <br />
+                <span className="italic">like home</span>
+              </h1>
+              <p className="text-lg sm:text-xl text-olive mb-10 font-light max-w-lg mx-auto lg:mx-0">
+                Curated prints for those who believe their walls deserve more than ordinary
+              </p>
+              <Link
+                href="/shop"
+                className="group inline-flex items-center px-10 py-4 bg-charcoal text-cream text-sm tracking-widest uppercase hover:bg-olive transition-all duration-300"
+              >
+                Shop Now
+                <ArrowRight className="ml-3 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-charcoal/30 rounded-full flex items-start justify-center p-2">
-            <div className="w-1 h-2 bg-charcoal/50 rounded-full" />
+            {/* Hero image */}
+            <div className="order-1 lg:order-2">
+              <div className="aspect-[3/4] relative overflow-hidden">
+                <Image
+                  src="/images/grecian-arches.jpg"
+                  alt="Framed Nest - Premium Art Prints"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
