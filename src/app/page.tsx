@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section - Full width with centered content */}
-      <section className="relative h-[85vh] flex items-center overflow-hidden">
+      <section className="relative h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/grecian-arches.jpg"
