@@ -147,34 +147,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Full Width Image Break */}
-      <section className="relative h-[60vh] overflow-hidden">
-        <Image
-          src="/images/misty-mountains.jpg"
-          alt="Premium art for your home"
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-charcoal/40" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-cream max-w-2xl px-4">
-            <p className="text-sm uppercase tracking-[0.2em] mb-4 text-cream/80">The Details Matter</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light mb-6">
-              Premium prints that transform spaces
-            </h2>
-            <p className="text-cream/80 mb-8 font-light">
-              Each piece is printed on 200gsm museum-grade matte paper with archival inks that last a lifetime
-            </p>
-            <Link
-              href="/about"
-              className="inline-flex items-center px-8 py-3 border border-cream text-cream text-sm tracking-widest uppercase hover:bg-cream hover:text-charcoal transition-all duration-300"
-            >
-              Our Quality Promise
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Collections Grid - Premium */}
       <section className="py-24 sm:py-32 bg-sand/10">
         <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -262,14 +234,15 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
-              <p className="text-sm uppercase tracking-[0.2em] text-olive mb-4">Craftsmanship</p>
+              <p className="text-sm uppercase tracking-[0.2em] text-olive mb-4">The Details Matter</p>
               <h2 className="text-3xl sm:text-4xl font-light text-charcoal mb-6 tracking-tight">
-                Quality you can feel
+                Premium prints that transform spaces
               </h2>
               <div className="space-y-4 text-olive leading-relaxed">
                 <p>
                   Every print is produced on 200gsm museum-grade matte paper using archival
-                  pigment inks. The result? Rich, vibrant colors that won&apos;t fade for generations.
+                  pigment inks that last a lifetime. The result? Rich, vibrant colors that
+                  won&apos;t fade for generations.
                 </p>
                 <p>
                   We partner with certified print houses that share our obsession with perfection.
@@ -287,7 +260,7 @@ export default function Home() {
             </div>
             <div className="aspect-[4/5] relative overflow-hidden order-1 md:order-2">
               <Image
-                src="/images/desert-dunes.jpg"
+                src="/images/misty-mountains.jpg"
                 alt="Premium quality prints"
                 fill
                 className="object-cover"
@@ -367,7 +340,7 @@ export default function Home() {
             </div>
             <div className="aspect-[4/5] relative overflow-hidden order-1 md:order-2">
               <Image
-                src="/images/misty-mountains.jpg"
+                src="/images/desert-dunes.jpg"
                 alt="Sustainable practices"
                 fill
                 className="object-cover"
