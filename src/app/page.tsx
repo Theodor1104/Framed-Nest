@@ -147,49 +147,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Collections Grid - Premium */}
-      <section className="py-24 sm:py-32 bg-sand/10">
-        <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-sm uppercase tracking-[0.2em] text-olive mb-4">Curated Collections</p>
-            <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-charcoal">
-              Shop by Style
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            {collectionsInfo.map((collection) => (
-              <Link
-                key={collection.slug}
-                href={`/collections/${collection.slug}`}
-                className="group relative"
-              >
-                <div className="aspect-[4/5] overflow-hidden relative">
-                  <Image
-                    src={collection.image}
-                    alt={collection.name}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/20 to-transparent" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-end p-6 text-center">
-                    <h3 className="text-lg sm:text-xl font-light text-cream mb-1">
-                      {collection.name}
-                    </h3>
-                    <p className="text-xs text-cream/70 uppercase tracking-wider">
-                      {collection.count} prints
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Brand Story - Refined */}
-      <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8">
+      {/* Brand Story - Between products and collections */}
+      <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-sand/10">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="aspect-[4/5] relative overflow-hidden">
@@ -225,6 +184,47 @@ export default function Home() {
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Collections Grid - Premium */}
+      <section className="py-24 sm:py-32">
+        <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-sm uppercase tracking-[0.2em] text-olive mb-4">Curated Collections</p>
+            <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-charcoal">
+              Shop by Style
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            {collectionsInfo.map((collection) => (
+              <Link
+                key={collection.slug}
+                href={`/collections/${collection.slug}`}
+                className="group relative"
+              >
+                <div className="aspect-[4/5] overflow-hidden relative">
+                  <Image
+                    src={collection.image}
+                    alt={collection.name}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/20 to-transparent" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-end p-6 text-center">
+                    <h3 className="text-lg sm:text-xl font-light text-cream mb-1">
+                      {collection.name}
+                    </h3>
+                    <p className="text-xs text-cream/70 uppercase tracking-wider">
+                      {collection.count} prints
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
