@@ -21,44 +21,38 @@ const collectionsInfo = [
 export default function Home() {
   return (
     <div>
-      {/* Hero Section - Clean minimal design */}
-      <section className="relative min-h-[90vh] flex items-center justify-center bg-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Text content */}
-            <div className="text-center lg:text-left order-2 lg:order-1">
-              <p className="text-sm uppercase tracking-[0.3em] text-olive mb-6">
-                Premium Art Prints
-              </p>
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-light tracking-tight text-charcoal mb-8">
-                Art that feels
-                <br />
-                <span className="italic">like home</span>
-              </h1>
-              <p className="text-lg sm:text-xl text-olive mb-10 font-light max-w-lg mx-auto lg:mx-0">
-                Curated prints for those who believe their walls deserve more than ordinary
-              </p>
-              <Link
-                href="/shop"
-                className="group inline-flex items-center px-10 py-4 bg-charcoal text-cream text-sm tracking-widest uppercase hover:bg-olive transition-all duration-300"
-              >
-                Shop Now
-                <ArrowRight className="ml-3 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-
-            {/* Hero image */}
-            <div className="order-1 lg:order-2">
-              <div className="aspect-[3/4] relative overflow-hidden">
-                <Image
-                  src="/images/grecian-arches.jpg"
-                  alt="Framed Nest - Premium Art Prints"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </div>
+      {/* Hero Section - Full width with centered content */}
+      <section className="relative h-[85vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/grecian-arches.jpg"
+            alt="Framed Nest - Premium Art Prints"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-cream/70" />
+        </div>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <p className="text-sm uppercase tracking-[0.3em] text-olive mb-4">
+              Premium Art Prints
+            </p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tight text-charcoal mb-6">
+              Art that feels
+              <br />
+              <span className="italic">like home</span>
+            </h1>
+            <p className="text-lg text-olive mb-8 font-light max-w-md">
+              Curated prints for those who believe their walls deserve more than ordinary
+            </p>
+            <Link
+              href="/shop"
+              className="group inline-flex items-center px-8 py-4 bg-charcoal text-cream text-sm tracking-widest uppercase hover:bg-olive transition-all duration-300"
+            >
+              Shop Now
+              <ArrowRight className="ml-3 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </div>
       </section>
