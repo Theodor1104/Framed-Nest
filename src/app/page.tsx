@@ -230,9 +230,9 @@ export default function Home() {
       </section>
 
       {/* Staircase Section 1: Quality + Framing */}
-      <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-sand/10">
-        <div className="max-w-6xl mx-auto space-y-16 md:space-y-24">
-          {/* First pair: Image left, Text right */}
+      <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-sand/10 overflow-hidden">
+        <div className="max-w-6xl mx-auto space-y-20 md:space-y-32">
+          {/* Top: Image left, Text right */}
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="aspect-[4/5] relative overflow-hidden">
               <Image
@@ -269,9 +269,17 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Second pair: Text left (offset), Image right */}
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center md:ml-16 lg:ml-24">
-            <div className="order-2 md:order-1">
+          {/* Bottom: Image left, Text right - offset to the right */}
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center md:translate-x-20 lg:translate-x-32">
+            <div className="aspect-[4/5] relative overflow-hidden">
+              <Image
+                src="/images/grecian-arches.jpg"
+                alt="Premium framing options"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div>
               <p className="text-sm uppercase tracking-[0.2em] text-olive mb-4">The Finishing Touch</p>
               <h2 className="text-3xl sm:text-4xl font-light text-charcoal mb-6 tracking-tight">
                 Ready to hang, designed to last
@@ -295,22 +303,14 @@ export default function Home() {
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </div>
-            <div className="aspect-[4/5] relative overflow-hidden order-1 md:order-2">
-              <Image
-                src="/images/grecian-arches.jpg"
-                alt="Premium framing options"
-                fill
-                className="object-cover"
-              />
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Staircase Section 2: Sustainability + Philosophy */}
-      <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto space-y-16 md:space-y-24">
-          {/* First pair: Image left, Text right */}
+      {/* Staircase Section 2: Sustainability + Delivery */}
+      <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="max-w-6xl mx-auto space-y-20 md:space-y-32">
+          {/* Top: Image left, Text right */}
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="aspect-[4/5] relative overflow-hidden">
               <Image
@@ -346,22 +346,29 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Second pair: Text left (offset), Image right */}
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center md:ml-16 lg:ml-24">
-            <div className="order-2 md:order-1">
-              <p className="text-sm uppercase tracking-[0.2em] text-olive mb-4">Made for You</p>
+          {/* Bottom: Image left, Text right - offset to the right */}
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center md:translate-x-20 lg:translate-x-32">
+            <div className="aspect-[4/5] relative overflow-hidden">
+              <Image
+                src="/images/santorini-steps.jpg"
+                alt="Fast delivery"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <p className="text-sm uppercase tracking-[0.2em] text-olive mb-4">Delivery</p>
               <h2 className="text-3xl sm:text-4xl font-light text-charcoal mb-6 tracking-tight">
-                Every print tells a story
+                From us to your walls
               </h2>
               <div className="space-y-4 text-olive leading-relaxed">
                 <p>
-                  From the moment you choose your print to the day it arrives at your door,
-                  we ensure every step meets our exacting standards. Because your walls
-                  deserve nothing less.
+                  Free shipping on orders over 499 kr. Every print is carefully packaged
+                  in protective materials to ensure it arrives in perfect condition.
                 </p>
                 <p>
-                  With secure packaging, fast delivery, and a satisfaction guarantee,
-                  we make transforming your space effortless and enjoyable.
+                  Expect delivery within 5-7 business days. Track your order every step
+                  of the way, from production to your doorstep.
                 </p>
               </div>
               <Link
@@ -371,14 +378,6 @@ export default function Home() {
                 Start shopping
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
-            </div>
-            <div className="aspect-[4/5] relative overflow-hidden order-1 md:order-2">
-              <Image
-                src="/images/santorini-steps.jpg"
-                alt="Every print tells a story"
-                fill
-                className="object-cover"
-              />
             </div>
           </div>
         </div>
