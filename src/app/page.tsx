@@ -310,7 +310,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center md:translate-x-20 lg:translate-x-32">
             <div className="aspect-[4/5] relative overflow-hidden">
               <Image
-                src="/images/female-profile.jpg"
+                src="/images/mediterranean-door.jpg"
                 alt="Premium framing options"
                 fill
                 className="object-cover"
