@@ -147,10 +147,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Our Philosophy - Standalone section */}
-      <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-sand/10">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+      {/* Staircase Section 1: Our Philosophy + Sustainability */}
+      <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-sand/10 overflow-hidden">
+        <div className="max-w-6xl mx-auto space-y-20 md:space-y-32">
+          {/* Top: Image left, Text right */}
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="aspect-[4/5] relative overflow-hidden">
               <Image
                 src="/images/spiral-staircase.jpg"
@@ -181,6 +182,42 @@ export default function Home() {
                 className="inline-flex items-center mt-8 text-sm text-charcoal tracking-widest uppercase border-b border-charcoal pb-1 hover:text-olive hover:border-olive transition-colors"
               >
                 Learn more about us
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Bottom: Image left, Text right - offset to the right */}
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center md:translate-x-20 lg:translate-x-32">
+            <div className="aspect-[4/5] relative overflow-hidden">
+              <Image
+                src="/images/desert-dunes.jpg"
+                alt="Sustainable practices"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <p className="text-sm uppercase tracking-[0.2em] text-olive mb-4">Sustainability</p>
+              <h2 className="text-3xl sm:text-4xl font-light text-charcoal mb-6 tracking-tight">
+                Mindful by design
+              </h2>
+              <div className="space-y-4 text-olive leading-relaxed">
+                <p>
+                  We print on demand, which means zero waste from unsold inventory. Your print
+                  is created specifically for you, reducing our environmental footprint while
+                  ensuring freshness.
+                </p>
+                <p>
+                  Our paper is FSC-certified, our packaging is recyclable, and we partner with
+                  carbon-neutral shipping providers. Beautiful art shouldn&apos;t cost the earth.
+                </p>
+              </div>
+              <Link
+                href="/about"
+                className="inline-flex items-center mt-8 text-sm text-charcoal tracking-widest uppercase border-b border-charcoal pb-1 hover:text-olive hover:border-olive transition-colors"
+              >
+                Our sustainability efforts
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </div>
