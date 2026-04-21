@@ -147,6 +147,47 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Our Philosophy - Standalone section */}
+      <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-sand/10">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="aspect-[4/5] relative overflow-hidden">
+              <Image
+                src="/images/spiral-staircase.jpg"
+                alt="Framed Nest"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <p className="text-sm uppercase tracking-[0.2em] text-olive mb-4">Our Philosophy</p>
+              <h2 className="text-3xl sm:text-4xl font-light text-charcoal mb-6 tracking-tight">
+                Your walls deserve intention
+              </h2>
+              <div className="space-y-4 text-olive leading-relaxed">
+                <p>
+                  At Framed Nest, we believe that the art on your walls should be as thoughtfully
+                  chosen as every other element of your home. Not random posters. Not mass-produced
+                  prints. But carefully curated pieces that elevate your space.
+                </p>
+                <p>
+                  Each piece in our collection is selected with one question: would this belong
+                  in a beautifully designed home? If it would not feel at home in a Copenhagen
+                  apartment or a minimalist villa, it does not belong here.
+                </p>
+              </div>
+              <Link
+                href="/about"
+                className="inline-flex items-center mt-8 text-sm text-charcoal tracking-widest uppercase border-b border-charcoal pb-1 hover:text-olive hover:border-olive transition-colors"
+              >
+                Learn more about us
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Collections Grid - Premium */}
       <section className="py-24 sm:py-32">
         <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -259,82 +300,6 @@ export default function Home() {
                 className="inline-flex items-center mt-8 text-sm text-charcoal tracking-widest uppercase border-b border-charcoal pb-1 hover:text-olive hover:border-olive transition-colors"
               >
                 Explore framing options
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Staircase Section 2: Sustainability + Delivery */}
-      <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="max-w-6xl mx-auto space-y-20 md:space-y-32">
-          {/* Top: Image left, Text right */}
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div className="aspect-[4/5] relative overflow-hidden">
-              <Image
-                src="/images/desert-dunes.jpg"
-                alt="Sustainable practices"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div>
-              <p className="text-sm uppercase tracking-[0.2em] text-olive mb-4">Sustainability</p>
-              <h2 className="text-3xl sm:text-4xl font-light text-charcoal mb-6 tracking-tight">
-                Mindful by design
-              </h2>
-              <div className="space-y-4 text-olive leading-relaxed">
-                <p>
-                  We print on demand, which means zero waste from unsold inventory. Your print
-                  is created specifically for you, reducing our environmental footprint while
-                  ensuring freshness.
-                </p>
-                <p>
-                  Our paper is FSC-certified, our packaging is recyclable, and we partner with
-                  carbon-neutral shipping providers. Beautiful art shouldn&apos;t cost the earth.
-                </p>
-              </div>
-              <Link
-                href="/about"
-                className="inline-flex items-center mt-8 text-sm text-charcoal tracking-widest uppercase border-b border-charcoal pb-1 hover:text-olive hover:border-olive transition-colors"
-              >
-                Our sustainability efforts
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Bottom: Image left, Text right - offset to the right */}
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center md:translate-x-20 lg:translate-x-32">
-            <div className="aspect-[4/5] relative overflow-hidden">
-              <Image
-                src="/images/santorini-steps.jpg"
-                alt="Fast delivery"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div>
-              <p className="text-sm uppercase tracking-[0.2em] text-olive mb-4">Delivery</p>
-              <h2 className="text-3xl sm:text-4xl font-light text-charcoal mb-6 tracking-tight">
-                From us to your walls
-              </h2>
-              <div className="space-y-4 text-olive leading-relaxed">
-                <p>
-                  Free shipping on orders over 499 kr. Every print is carefully packaged
-                  in protective materials to ensure it arrives in perfect condition.
-                </p>
-                <p>
-                  Expect delivery within 5-7 business days. Track your order every step
-                  of the way, from production to your doorstep.
-                </p>
-              </div>
-              <Link
-                href="/shop"
-                className="inline-flex items-center mt-8 text-sm text-charcoal tracking-widest uppercase border-b border-charcoal pb-1 hover:text-olive hover:border-olive transition-colors"
-              >
-                Start shopping
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </div>
