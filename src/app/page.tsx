@@ -53,6 +53,13 @@ export default function Home() {
             <ArrowRight className="ml-3 w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-charcoal/30 rounded-full flex items-start justify-center p-2">
+            <div className="w-1 h-2 bg-charcoal/50 rounded-full" />
+          </div>
+        </div>
       </section>
 
       {/* Trust Banner */}
