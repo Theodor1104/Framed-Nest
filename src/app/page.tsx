@@ -250,14 +250,18 @@ export default function Home() {
                     className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                     sizes="(max-width: 768px) 50vw, 25vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/30 to-charcoal/10 group-hover:from-charcoal/90 transition-all duration-300" />
                   <div className="absolute inset-0 flex flex-col items-center justify-end p-6 text-center">
                     <h3 className="text-lg sm:text-xl font-light text-cream mb-1">
                       {collection.name}
                     </h3>
-                    <p className="text-xs text-cream/70 uppercase tracking-wider">
+                    <p className="text-xs text-cream/70 uppercase tracking-wider mb-3">
                       {collection.count} prints
                     </p>
+                    <span className="inline-flex items-center gap-1 text-xs text-cream bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                      Se kollektion
+                      <ArrowRight className="w-3 h-3" />
+                    </span>
                   </div>
                 </div>
               </Link>
