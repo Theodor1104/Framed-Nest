@@ -28,23 +28,23 @@ export default function Footer() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="text-2xl font-light text-cream mb-2">
-                Bliv en del af Framed Nest
+                Join the Framed Nest
               </h3>
               <p className="text-cream/60 font-light">
-                Få eksklusive tilbud, nye kollektioner og inspiration direkte i din indbakke.
+                Get exclusive offers, new collections and inspiration delivered to your inbox.
               </p>
             </div>
             <form className="flex gap-3">
               <input
                 type="email"
-                placeholder="Din email"
+                placeholder="Your email"
                 className="flex-1 px-4 py-3 bg-cream/10 border border-cream/20 text-cream placeholder:text-cream/40 focus:outline-none focus:border-cream/50 transition-colors"
               />
               <button
                 type="submit"
                 className="px-6 py-3 bg-cream text-charcoal text-sm tracking-wider uppercase hover:bg-sand transition-colors whitespace-nowrap"
               >
-                Tilmeld
+                Subscribe
               </button>
             </form>
           </div>
@@ -60,7 +60,7 @@ export default function Footer() {
               Framed Nest
             </h3>
             <p className="text-sm leading-relaxed text-cream/60 mb-6">
-              Kuraterede kunstprint til moderne hjem. Premium plakater der transformerer dit rum.
+              Curated art prints for modern homes. Premium posters that transform your space.
             </p>
             {/* Social Links */}
             <div className="flex gap-4">
@@ -100,22 +100,22 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link href="/shop" className="text-sm text-cream/60 hover:text-cream transition-colors">
-                  Alle Prints
+                  All Prints
                 </Link>
               </li>
               <li>
                 <Link href="/collections" className="text-sm text-cream/60 hover:text-cream transition-colors">
-                  Kollektioner
+                  Collections
                 </Link>
               </li>
               <li>
                 <Link href="/collections/architectural" className="text-sm text-cream/60 hover:text-cream transition-colors">
-                  Arkitektur
+                  Architectural
                 </Link>
               </li>
               <li>
                 <Link href="/collections/photography" className="text-sm text-cream/60 hover:text-cream transition-colors">
-                  Fotografi
+                  Photography
                 </Link>
               </li>
             </ul>
@@ -129,7 +129,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link href="/about" className="text-sm text-cream/60 hover:text-cream transition-colors">
-                  Om Os
+                  About Us
                 </Link>
               </li>
               <li>
@@ -139,12 +139,12 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/shipping" className="text-sm text-cream/60 hover:text-cream transition-colors">
-                  Levering
+                  Shipping
                 </Link>
               </li>
               <li>
                 <Link href="/returns" className="text-sm text-cream/60 hover:text-cream transition-colors">
-                  Returnering
+                  Returns
                 </Link>
               </li>
             </ul>
@@ -153,7 +153,7 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 className="text-sm font-medium tracking-wider uppercase text-cream mb-4">
-              Kontakt
+              Contact
             </h4>
             <ul className="space-y-3">
               <li>
@@ -162,7 +162,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="text-sm text-cream/60">
-                Svar inden for 24 timer
+                Response within 24 hours
               </li>
             </ul>
           </div>
@@ -172,7 +172,7 @@ export default function Footer() {
         <div className="border-t border-cream/10 mt-12 pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-6">
-              <p className="text-xs text-cream/40">Sikker betaling med</p>
+              <p className="text-xs text-cream/40">Secure payment with</p>
               <div className="flex gap-3">
                 <div className="px-3 py-1 bg-cream/10 rounded text-xs text-cream/60">Visa</div>
                 <div className="px-3 py-1 bg-cream/10 rounded text-xs text-cream/60">Mastercard</div>
@@ -180,7 +180,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-xs text-cream/40">
-              &copy; {new Date().getFullYear()} Framed Nest. Alle rettigheder forbeholdes.
+              &copy; {new Date().getFullYear()} Framed Nest. All rights reserved.
             </p>
           </div>
         </div>
@@ -188,10 +188,10 @@ export default function Footer() {
         {/* Legal */}
         <div className="flex justify-center gap-6 mt-6">
           <Link href="/privacy" className="text-xs text-cream/40 hover:text-cream/60 transition-colors">
-            Privatlivspolitik
+            Privacy Policy
           </Link>
           <Link href="/terms" className="text-xs text-cream/40 hover:text-cream/60 transition-colors">
-            Handelsbetingelser
+            Terms of Service
           </Link>
           <Link href="/cookies" className="text-xs text-cream/40 hover:text-cream/60 transition-colors">
             Cookies

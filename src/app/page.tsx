@@ -251,7 +251,7 @@ export default function Home() {
                       {collection.count} prints
                     </p>
                     <span className="inline-flex items-center gap-1 text-xs text-cream bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                      Se kollektion
+                      View collection
                       <ArrowRight className="w-3 h-3" />
                     </span>
                   </div>

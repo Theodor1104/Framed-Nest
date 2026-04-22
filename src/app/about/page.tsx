@@ -19,7 +19,7 @@ export default function AboutPage() {
         </div>
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <p className="text-sm uppercase tracking-[0.3em] text-cream/80 mb-6">
-            Vores Historie
+            Our Story
           </p>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-cream mb-6">
             Art that feels
@@ -27,32 +27,8 @@ export default function AboutPage() {
             <span className="italic">like home</span>
           </h1>
           <p className="text-lg sm:text-xl text-cream/80 font-light max-w-2xl mx-auto">
-            Vi skaber kuraterede kunstprint til dem, der tror på at vægge fortjener mere end det ordinære.
+            We create curated art prints for those who believe their walls deserve more than ordinary.
           </p>
-        </div>
-      </section>
-
-      {/* Intro Stats */}
-      <section className="py-16 bg-charcoal text-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <p className="text-4xl sm:text-5xl font-light mb-2">500+</p>
-              <p className="text-sm text-cream/60 uppercase tracking-wider">Unikke Designs</p>
-            </div>
-            <div>
-              <p className="text-4xl sm:text-5xl font-light mb-2">10k+</p>
-              <p className="text-sm text-cream/60 uppercase tracking-wider">Glade Kunder</p>
-            </div>
-            <div>
-              <p className="text-4xl sm:text-5xl font-light mb-2">100%</p>
-              <p className="text-sm text-cream/60 uppercase tracking-wider">Bæredygtigt</p>
-            </div>
-            <div>
-              <p className="text-4xl sm:text-5xl font-light mb-2">4.9</p>
-              <p className="text-sm text-cream/60 uppercase tracking-wider">Trustpilot Score</p>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -62,25 +38,25 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div>
               <p className="text-sm uppercase tracking-[0.2em] text-olive mb-4">
-                Hvordan Det Startede
+                How It Started
               </p>
               <h2 className="text-3xl sm:text-4xl font-light text-charcoal mb-6 tracking-tight">
-                Fra frustration til passion
+                From frustration to passion
               </h2>
               <div className="space-y-4 text-olive leading-relaxed">
                 <p>
-                  Framed Nest startede i 2023 med en simpel frustration: hvorfor er det
-                  så svært at finde kvalitetskunst til hjemmet, der ikke koster en formue
-                  eller ligner alt andet derude?
+                  Framed Nest started in 2023 with a simple frustration: why is it
+                  so hard to find quality art for your home that does not cost a fortune
+                  or look like everything else out there?
                 </p>
                 <p>
-                  Vi var trætte af masseproducerede plakater uden sjæl og galleripriser
-                  der sprængte budgettet. Så vi besluttede at skabe et tredje alternativ —
-                  kuraterede kunstprint i museum-kvalitet til priser, der giver mening.
+                  We were tired of mass-produced posters without soul and gallery prices
+                  that broke the budget. So we decided to create a third option —
+                  curated art prints in museum quality at prices that make sense.
                 </p>
                 <p>
-                  I dag arbejder vi med talentfulde kunstnere og fotografer fra hele verden
-                  for at bringe unikke, tidløse værker ind i danske hjem.
+                  Today we work with talented artists and photographers from around the world
+                  to bring unique, timeless pieces into homes everywhere.
                 </p>
               </div>
             </div>
@@ -159,10 +135,10 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <p className="text-sm uppercase tracking-[0.2em] text-olive mb-4">
-              Hvad Vi Står For
+              What We Stand For
             </p>
             <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-charcoal">
-              Vores Værdier
+              Our Values
             </h2>
           </div>
 
@@ -171,30 +147,30 @@ export default function AboutPage() {
               <div className="w-14 h-14 mb-6 rounded-full bg-sand/30 flex items-center justify-center">
                 <Award className="w-7 h-7 text-charcoal" />
               </div>
-              <h3 className="text-xl font-light text-charcoal mb-3">Kompromisløs Kvalitet</h3>
+              <h3 className="text-xl font-light text-charcoal mb-3">Uncompromising Quality</h3>
               <p className="text-olive font-light leading-relaxed">
-                200gsm museum-kvalitet mat papir. Arkiv pigmentblæk der holder i over 100 år.
-                Håndlavede rammer i massiv træ. Vi går aldrig på kompromis.
+                200gsm museum-quality matte paper. Archival pigment inks that last over 100 years.
+                Handcrafted frames in solid wood. We never compromise.
               </p>
             </div>
             <div className="bg-white p-8 sm:p-10">
               <div className="w-14 h-14 mb-6 rounded-full bg-sand/30 flex items-center justify-center">
                 <Heart className="w-7 h-7 text-charcoal" />
               </div>
-              <h3 className="text-xl font-light text-charcoal mb-3">Omhyggeligt Kurateret</h3>
+              <h3 className="text-xl font-light text-charcoal mb-3">Carefully Curated</h3>
               <p className="text-olive font-light leading-relaxed">
-                Hvert eneste print i vores kollektion er håndudvalgt. Vi spørger altid:
-                ville dette høre hjemme i et smukt designet hjem?
+                Every single print in our collection is hand-selected. We always ask:
+                would this belong in a beautifully designed home?
               </p>
             </div>
             <div className="bg-white p-8 sm:p-10">
               <div className="w-14 h-14 mb-6 rounded-full bg-sand/30 flex items-center justify-center">
                 <Leaf className="w-7 h-7 text-charcoal" />
               </div>
-              <h3 className="text-xl font-light text-charcoal mb-3">Bæredygtig Produktion</h3>
+              <h3 className="text-xl font-light text-charcoal mb-3">Sustainable Production</h3>
               <p className="text-olive font-light leading-relaxed">
-                Print-on-demand betyder nul spild fra usolgte varer. FSC-certificeret papir,
-                genanvendelig emballage og CO2-neutral levering.
+                Print-on-demand means zero waste from unsold items. FSC-certified paper,
+                recyclable packaging and carbon-neutral delivery.
               </p>
             </div>
           </div>
@@ -206,10 +182,10 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <p className="text-sm uppercase tracking-[0.2em] text-olive mb-4">
-              Fra Os Til Dig
+              From Us To You
             </p>
             <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-charcoal">
-              Sådan Virker Det
+              How It Works
             </h2>
           </div>
 
@@ -221,9 +197,9 @@ export default function AboutPage() {
               <div className="mb-4">
                 <Palette className="w-8 h-8 mx-auto text-olive" />
               </div>
-              <h3 className="text-lg font-light text-charcoal mb-2">Vælg Dit Print</h3>
+              <h3 className="text-lg font-light text-charcoal mb-2">Choose Your Print</h3>
               <p className="text-sm text-olive font-light">
-                Udforsk vores kuraterede kollektion og find det perfekte kunstværk til dit rum.
+                Explore our curated collection and find the perfect artwork for your space.
               </p>
             </div>
             <div className="text-center">
@@ -233,9 +209,9 @@ export default function AboutPage() {
               <div className="mb-4">
                 <Home className="w-8 h-8 mx-auto text-olive" />
               </div>
-              <h3 className="text-lg font-light text-charcoal mb-2">Tilpas Størrelse</h3>
+              <h3 className="text-lg font-light text-charcoal mb-2">Customize Size</h3>
               <p className="text-sm text-olive font-light">
-                Vælg mellem fire størrelser og tilføj evt. en premium ramme i eg, sort eller hvid.
+                Choose from four sizes and optionally add a premium frame in oak, black or white.
               </p>
             </div>
             <div className="text-center">
@@ -245,9 +221,9 @@ export default function AboutPage() {
               <div className="mb-4">
                 <Package className="w-8 h-8 mx-auto text-olive" />
               </div>
-              <h3 className="text-lg font-light text-charcoal mb-2">Vi Producerer</h3>
+              <h3 className="text-lg font-light text-charcoal mb-2">We Produce</h3>
               <p className="text-sm text-olive font-light">
-                Dit print produceres on-demand i vores certificerede trykkerier med premium materialer.
+                Your print is produced on-demand in our certified print houses with premium materials.
               </p>
             </div>
             <div className="text-center">
@@ -257,9 +233,9 @@ export default function AboutPage() {
               <div className="mb-4">
                 <Check className="w-8 h-8 mx-auto text-olive" />
               </div>
-              <h3 className="text-lg font-light text-charcoal mb-2">Leveret Til Dig</h3>
+              <h3 className="text-lg font-light text-charcoal mb-2">Delivered To You</h3>
               <p className="text-sm text-olive font-light">
-                Omhyggeligt pakket og leveret til din dør inden for 5-7 hverdage.
+                Carefully packed and delivered to your door within 5-7 business days.
               </p>
             </div>
           </div>
@@ -280,90 +256,28 @@ export default function AboutPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-xl">
             <p className="text-sm uppercase tracking-[0.2em] text-cream/70 mb-4">
-              Vores Løfte
+              Our Promise
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-cream mb-6 tracking-tight">
-              Premium i hver eneste detalje
+              Premium in every detail
             </h2>
             <div className="space-y-4 text-cream/80 leading-relaxed mb-8">
               <p>
-                Vi printer kun på det bedste. 200gsm museum-kvalitet mat papir med en
-                subtil tekstur der giver hvert print et autentisk, håndgribeligt udtryk.
+                We only print on the best. 200gsm museum-quality matte paper with a
+                subtle texture that gives each print an authentic, tangible expression.
               </p>
               <p>
-                Vores arkiv pigmentblæk sikrer at farverne forbliver levende og
-                præcise i over 100 år. Det er ikke bare et print — det er en investering.
+                Our archival pigment inks ensure that colors remain vibrant and
+                accurate for over 100 years. It is not just a print — it is an investment.
               </p>
             </div>
             <Link
               href="/shop"
               className="group inline-flex items-center px-8 py-4 bg-cream text-charcoal text-sm tracking-widest uppercase hover:bg-sand transition-all duration-300"
             >
-              Se Kollektionen
+              View Collection
               <ArrowRight className="ml-3 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-24 sm:py-32 bg-sand/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <p className="text-sm uppercase tracking-[0.2em] text-olive mb-4">
-              Hvad Vores Kunder Siger
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-charcoal">
-              Ægte Anmeldelser
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-8">
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="text-olive leading-relaxed mb-6 italic">
-                &ldquo;Kvaliteten overgik alle mine forventninger. Papiret føles premium,
-                og farverne er præcis som på billedet. Vil helt sikkert købe igen!&rdquo;
-              </p>
-              <p className="text-charcoal font-medium">— Marie S.</p>
-              <p className="text-sm text-olive">København</p>
-            </div>
-            <div className="bg-white p-8">
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="text-olive leading-relaxed mb-6 italic">
-                &ldquo;Endelig en webshop med kunstprint der ikke ligner alt det andet!
-                Elsker den minimalistiske stil og den hurtige levering.&rdquo;
-              </p>
-              <p className="text-charcoal font-medium">— Thomas K.</p>
-              <p className="text-sm text-olive">Aarhus</p>
-            </div>
-            <div className="bg-white p-8">
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="text-olive leading-relaxed mb-6 italic">
-                &ldquo;Købte tre prints til stuen og de ser fantastiske ud sammen.
-                Rammen i egetræ er virkelig flot kvalitet. Meget tilfreds!&rdquo;
-              </p>
-              <p className="text-charcoal font-medium">— Line J.</p>
-              <p className="text-sm text-olive">Odense</p>
-            </div>
           </div>
         </div>
       </section>
@@ -372,27 +286,27 @@ export default function AboutPage() {
       <section className="py-24 sm:py-32">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm uppercase tracking-[0.2em] text-olive mb-4">
-            Har Du Spørgsmål?
+            Have Questions?
           </p>
           <h2 className="text-3xl sm:text-4xl font-light text-charcoal mb-6 tracking-tight">
-            Vi er her for at hjælpe
+            We are here to help
           </h2>
           <p className="text-lg text-olive mb-10 font-light max-w-2xl mx-auto">
-            Uanset om du har spørgsmål om vores produkter, levering, eller bare vil sige hej —
-            vi svarer altid inden for 24 timer.
+            Whether you have questions about our products, delivery, or just want to say hello —
+            we always respond within 24 hours.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="mailto:hello@framednest.dk"
               className="inline-flex items-center justify-center px-8 py-4 bg-charcoal text-cream text-sm tracking-widest uppercase hover:bg-olive transition-all duration-300"
             >
-              Send En Email
+              Send An Email
             </a>
             <Link
               href="/faq"
               className="inline-flex items-center justify-center px-8 py-4 border border-charcoal text-charcoal text-sm tracking-widest uppercase hover:bg-charcoal hover:text-cream transition-all duration-300"
             >
-              Se FAQ
+              View FAQ
             </Link>
           </div>
         </div>

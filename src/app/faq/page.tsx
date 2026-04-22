@@ -6,74 +6,74 @@ import { ChevronDown, Mail } from 'lucide-react';
 
 const faqs = [
   {
-    category: 'Bestilling & Levering',
+    category: 'Ordering & Delivery',
     questions: [
       {
-        q: 'Hvor lang tid tager levering?',
-        a: 'Ordrer leveres typisk inden for 5-7 hverdage. Dine prints produceres on-demand og sendes direkte fra vores printpartner i Europa.',
+        q: 'How long does delivery take?',
+        a: 'Orders are typically delivered within 5-7 business days. Your prints are produced on-demand and shipped directly from our print partner in Europe.',
       },
       {
-        q: 'Leverer I internationalt?',
-        a: 'Ja, vi sender til de fleste europæiske lande. Forsendelsesomkostninger varierer efter lokation og beregnes ved checkout.',
+        q: 'Do you ship internationally?',
+        a: 'Yes, we ship to most European countries. Shipping costs vary by location and are calculated at checkout.',
       },
       {
-        q: 'Er fragt gratis?',
-        a: 'Ja! Vi tilbyder gratis fragt på alle ordrer over 499 kr. Ordrer under dette beløb har en fast fragtpris på 39 kr.',
+        q: 'Is shipping free?',
+        a: 'Yes! We offer free shipping on all orders over 499 kr. Orders under this amount have a flat shipping rate of 39 kr.',
       },
       {
-        q: 'Kan jeg spore min ordre?',
-        a: 'Absolut. Når din ordre afsendes, modtager du en email med tracking-information, så du kan følge din pakke hele vejen.',
+        q: 'Can I track my order?',
+        a: 'Absolutely. When your order ships, you will receive an email with tracking information so you can follow your package all the way.',
       },
     ],
   },
   {
-    category: 'Produkter & Kvalitet',
+    category: 'Products & Quality',
     questions: [
       {
-        q: 'Hvilket papir bruger I?',
-        a: 'Alle vores prints produceres på premium 200gsm mat papir med en subtil tekstur, der giver hvert stykke en galleri-kvalitet finish. Papiret er FSC-certificeret og syrefrit for lang holdbarhed.',
+        q: 'What paper do you use?',
+        a: 'All our prints are produced on premium 200gsm matte paper with a subtle texture that gives each piece a gallery-quality finish. The paper is FSC-certified and acid-free for long-lasting durability.',
       },
       {
-        q: 'Hvilke størrelser findes?',
-        a: 'Vi tilbyder fire standardstørrelser: 21x30cm (A4), 30x40cm, 50x70cm og 70x100cm. Disse størrelser passer til standardrammer fra de fleste boligbutikker.',
+        q: 'What sizes are available?',
+        a: 'We offer four standard sizes: 21x30cm (A4), 30x40cm, 50x70cm and 70x100cm. These sizes fit standard frames from most home stores.',
       },
       {
-        q: 'Kommer prints med ramme?',
-        a: 'Prints sælges som standard uden ramme. Vi tilbyder valgfri premium egetræsrammer mod et tillæg. Rammerne er lavet af bæredygtigt træ med en ren, moderne profil.',
+        q: 'Do prints come with a frame?',
+        a: 'Prints are sold unframed by default. We offer optional premium oak frames for an additional cost. The frames are made from sustainable wood with a clean, modern profile.',
       },
       {
-        q: 'Er farverne præcise i forhold til det jeg ser online?',
-        a: 'Vi kalibrerer vores prints omhyggeligt for at matche de digitale previews. Dog kan små variationer forekomme på grund af forskelle i skærmindstillinger og lysforhold.',
+        q: 'Are the colors accurate compared to what I see online?',
+        a: 'We carefully calibrate our prints to match the digital previews. However, slight variations may occur due to differences in screen settings and lighting conditions.',
       },
     ],
   },
   {
-    category: 'Returnering & Refundering',
+    category: 'Returns & Refunds',
     questions: [
       {
-        q: 'Hvad er jeres returpolitik?',
-        a: 'Vi tilbyder 14 dages returret på uåbnede varer i original emballage. Da prints produceres på bestilling, kan vi ikke acceptere returneringer af åbnede eller brugte varer, medmindre de ankommer beskadiget.',
+        q: 'What is your return policy?',
+        a: 'We offer a 14-day return policy on unopened items in original packaging. Since prints are produced on-demand, we cannot accept returns on opened or used items unless they arrive damaged.',
       },
       {
-        q: 'Hvad hvis mit print ankommer beskadiget?',
-        a: 'Kontakt os inden for 48 timer efter levering med fotos af skaden. Vi sender en erstatning uden ekstra omkostninger.',
+        q: 'What if my print arrives damaged?',
+        a: 'Contact us within 48 hours of delivery with photos of the damage. We will send a replacement at no extra cost.',
       },
       {
-        q: 'Hvordan anmoder jeg om refundering?',
-        a: 'Send os en email på hello@framednest.dk med dit ordrenummer og årsagen til refunderingen. Vi behandler refunderinger inden for 5-7 hverdage.',
+        q: 'How do I request a refund?',
+        a: 'Email us at hello@framednest.dk with your order number and the reason for the refund. We process refunds within 5-7 business days.',
       },
     ],
   },
   {
-    category: 'Betaling',
+    category: 'Payment',
     questions: [
       {
-        q: 'Hvilke betalingsmetoder accepterer I?',
-        a: 'Vi accepterer alle større kreditkort (Visa, Mastercard, American Express) samt MobilePay, Apple Pay og Google Pay. Alle betalinger behandles sikkert gennem Stripe.',
+        q: 'What payment methods do you accept?',
+        a: 'We accept all major credit cards (Visa, Mastercard, American Express) as well as MobilePay, Apple Pay and Google Pay. All payments are processed securely through Stripe.',
       },
       {
-        q: 'Er mine betalingsoplysninger sikre?',
-        a: 'Ja, vi bruger Stripe til betalingsbehandling, som er PCI DSS Level 1 certificeret - det højeste niveau af sikkerhedscertificering tilgængeligt.',
+        q: 'Is my payment information secure?',
+        a: 'Yes, we use Stripe for payment processing, which is PCI DSS Level 1 certified - the highest level of security certification available.',
       },
     ],
   },
@@ -112,10 +112,10 @@ export default function FAQPage() {
             Support
           </p>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tight text-charcoal mb-6">
-            Ofte Stillede Spørgsmål
+            Frequently Asked Questions
           </h1>
           <p className="text-lg text-olive max-w-2xl mx-auto font-light">
-            Find svar på de mest almindelige spørgsmål om bestilling, levering og vores produkter.
+            Find answers to the most common questions about ordering, delivery and our products.
           </p>
         </div>
       </div>
@@ -143,16 +143,16 @@ export default function FAQPage() {
             <Mail className="w-7 h-7 text-olive" />
           </div>
           <h2 className="text-2xl font-light text-charcoal mb-3">
-            Har du stadig spørgsmål?
+            Still have questions?
           </h2>
           <p className="text-olive mb-8 font-light max-w-md mx-auto">
-            Vi er her for at hjælpe. Skriv til os, og vi vender tilbage inden for 24 timer.
+            We are here to help. Send us a message and we will get back to you within 24 hours.
           </p>
           <a
             href="mailto:hello@framednest.dk"
             className="inline-flex items-center px-8 py-4 bg-charcoal text-cream text-sm tracking-widest uppercase hover:bg-olive transition-all duration-300"
           >
-            Kontakt Os
+            Contact Us
           </a>
         </div>
       </div>
