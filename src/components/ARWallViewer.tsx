@@ -332,7 +332,7 @@ export default function ARWallViewer({ imageSrc, productTitle, isOpen, onClose, 
         setSessionActive(true);
       }
     } catch (err) {
-      setError('Kunne ikke starte kamera. Giv venligst tilladelse.');
+      setError('Could not start camera. Please grant permission.');
     }
   };
 
@@ -401,9 +401,9 @@ export default function ARWallViewer({ imageSrc, productTitle, isOpen, onClose, 
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95" onClick={onClose}>
         <div className="bg-white rounded-xl p-6 max-w-md text-center" onClick={e => e.stopPropagation()}>
           <Smartphone className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-medium mb-2">Ikke understøttet</h3>
-          <p className="text-gray-600 mb-4">Din enhed understøtter ikke kamera-adgang.</p>
-          <button onClick={onClose} className="px-6 py-2 bg-gray-900 text-white rounded-lg">Luk</button>
+          <h3 className="text-lg font-medium mb-2">Not supported</h3>
+          <p className="text-gray-600 mb-4">Your device does not support camera access.</p>
+          <button onClick={onClose} className="px-6 py-2 bg-gray-900 text-white rounded-lg">Close</button>
         </div>
       </div>
     );
@@ -415,7 +415,7 @@ export default function ARWallViewer({ imageSrc, productTitle, isOpen, onClose, 
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
         <div className="text-white text-center">
           <div className="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin mx-auto mb-4" />
-          <p>Tjekker AR-understøttelse...</p>
+          <p>Checking AR support...</p>
         </div>
       </div>
     );
@@ -434,10 +434,10 @@ export default function ARWallViewer({ imageSrc, productTitle, isOpen, onClose, 
             <div className="text-white">
               <h3 className="font-medium text-lg">{productTitle}</h3>
               <p className="text-sm text-white/80">
-                {!sessionActive ? 'Tryk start for at begynde' :
-                 placed ? 'Plakat placeret!' :
-                 wallDetected ? 'Overflade fundet! Tryk for at placere' :
-                 'Peg kameraet på en væg...'}
+                {!sessionActive ? 'Press start to begin' :
+                 placed ? 'Poster placed!' :
+                 wallDetected ? 'Surface found! Tap to place' :
+                 'Point the camera at a wall...'}
               </p>
             </div>
             <button onClick={endWebXR} className="p-2 bg-white/20 backdrop-blur rounded-full">
@@ -457,7 +457,7 @@ export default function ARWallViewer({ imageSrc, productTitle, isOpen, onClose, 
             <div className="absolute inset-0 flex items-center justify-center pointer-events-auto">
               <button onClick={startWebXR} className="px-8 py-4 bg-white text-black rounded-xl font-medium text-lg flex items-center gap-3">
                 <Camera className="w-6 h-6" />
-                Start AR Kamera
+                Start AR Camera
               </button>
             </div>
           )}
@@ -470,7 +470,7 @@ export default function ARWallViewer({ imageSrc, productTitle, isOpen, onClose, 
                 <div className={`px-4 py-2 rounded-full text-sm font-medium ${
                   wallDetected ? 'bg-green-500 text-white' : 'bg-yellow-500 text-black'
                 }`}>
-                  {wallDetected ? '✓ Overflade fundet' : '○ Søger efter overflade...'}
+                  {wallDetected ? '✓ Surface found' : '○ Searching for surface...'}
                 </div>
               )}
 
@@ -490,11 +490,11 @@ export default function ARWallViewer({ imageSrc, productTitle, isOpen, onClose, 
               {/* Action button */}
               {placed ? (
                 <button onClick={resetPlacement} className="px-6 py-3 bg-white text-black rounded-xl font-medium flex items-center gap-2">
-                  <Move className="w-5 h-5" /> Flyt plakat
+                  <Move className="w-5 h-5" /> Move poster
                 </button>
               ) : wallDetected ? (
                 <button onClick={placeOnWall} className="px-8 py-4 bg-white text-black rounded-xl font-medium text-lg">
-                  Placer på væg
+                  Place on wall
                 </button>
               ) : null}
             </div>
@@ -549,8 +549,8 @@ export default function ARWallViewer({ imageSrc, productTitle, isOpen, onClose, 
         <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-start pointer-events-auto bg-gradient-to-b from-black/70 to-transparent">
           <div className="text-white">
             <h3 className="font-medium text-lg">{productTitle}</h3>
-            <p className="text-sm text-white/80">{sessionActive ? 'Træk billedet til din væg' : 'Tryk for at starte kamera'}</p>
-            <p className="text-xs text-yellow-400 mt-1">Simpel tilstand (din enhed understøtter ikke fuld AR)</p>
+            <p className="text-sm text-white/80">{sessionActive ? 'Drag the image to your wall' : 'Tap to start camera'}</p>
+            <p className="text-xs text-yellow-400 mt-1">Simple mode (your device does not support full AR)</p>
           </div>
           <button onClick={() => { stopSimpleCamera(); onClose(); }} className="p-2 bg-white/20 backdrop-blur rounded-full">
             <X className="w-6 h-6 text-white" />
@@ -567,7 +567,7 @@ export default function ARWallViewer({ imageSrc, productTitle, isOpen, onClose, 
           <div className="absolute inset-0 flex items-center justify-center pointer-events-auto bg-black/80">
             <button onClick={startSimpleCamera} className="px-8 py-4 bg-white text-black rounded-xl font-medium text-lg flex items-center gap-3">
               <Camera className="w-6 h-6" />
-              Start Kamera
+              Start Camera
             </button>
           </div>
         )}
@@ -575,7 +575,7 @@ export default function ARWallViewer({ imageSrc, productTitle, isOpen, onClose, 
         {sessionActive && (
           <div className="absolute bottom-8 left-0 right-0 flex flex-col items-center gap-4 pointer-events-auto">
             <div className="bg-black/50 backdrop-blur rounded-full px-4 py-2 text-white text-sm">
-              Træk billedet • Brug +/- for størrelse
+              Drag the image • Use +/- for size
             </div>
             <div className="flex items-center gap-4 bg-white/95 backdrop-blur rounded-full px-6 py-3 shadow-xl">
               <button onClick={() => setSimpleScale(s => Math.max(0.2, s - 0.05))} className="p-2 hover:bg-gray-100 rounded-full">

@@ -282,14 +282,14 @@ export default function ProductPage({ params }: PageProps) {
                     className="flex-1 py-3 border border-sand text-olive hover:border-charcoal hover:text-charcoal text-sm tracking-wide transition-all flex items-center justify-center gap-2"
                   >
                     <Maximize2 className="w-4 h-4" />
-                    Se på væg
+                    View on wall
                   </button>
                   <button
                     onClick={() => setShowAR(true)}
                     className="flex-1 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm tracking-wide transition-all flex items-center justify-center gap-2 hover:from-blue-700 hover:to-purple-700"
                   >
                     <Camera className="w-4 h-4" />
-                    Prøv i dit rum (AR)
+                    Try in your room (AR)
                   </button>
                 </div>
               </div>

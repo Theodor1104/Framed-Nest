@@ -17,7 +17,7 @@ interface RoomShowroomProps {
 const scenes = [
   {
     id: 'white-minimal',
-    name: 'Hvid væg',
+    name: 'White wall',
     // Pure white/light gray wall - the artwork becomes the focus
     wallColor: '#F8F8F8',
     wallGradient: 'linear-gradient(180deg, #FFFFFF 0%, #F0F0F0 60%, #E8E8E8 100%)',
@@ -29,7 +29,7 @@ const scenes = [
   },
   {
     id: 'warm-beige',
-    name: 'Varm beige',
+    name: 'Warm beige',
     wallColor: '#F5EDE5',
     wallGradient: 'linear-gradient(180deg, #FAF5F0 0%, #F0E8E0 60%, #E8DED4 100%)',
     floorColor: '#8B7355',
@@ -40,7 +40,7 @@ const scenes = [
   },
   {
     id: 'soft-gray',
-    name: 'Blød grå',
+    name: 'Soft gray',
     wallColor: '#E8E8E8',
     wallGradient: 'linear-gradient(180deg, #F0F0F0 0%, #E5E5E5 60%, #DCDCDC 100%)',
     floorColor: '#A89888',
@@ -51,7 +51,7 @@ const scenes = [
   },
   {
     id: 'sage-green',
-    name: 'Salvie grøn',
+    name: 'Sage green',
     wallColor: '#D8E0D8',
     wallGradient: 'linear-gradient(180deg, #E5EBE5 0%, #D5DDD5 60%, #C8D4C8 100%)',
     floorColor: '#B8A898',
@@ -62,7 +62,7 @@ const scenes = [
   },
   {
     id: 'charcoal',
-    name: 'Mørk antracit',
+    name: 'Dark charcoal',
     wallColor: '#3A3A3A',
     wallGradient: 'linear-gradient(180deg, #454545 0%, #383838 60%, #2D2D2D 100%)',
     floorColor: '#2A2A2A',
@@ -73,7 +73,7 @@ const scenes = [
   },
   {
     id: 'navy',
-    name: 'Navy blå',
+    name: 'Navy blue',
     wallColor: '#2C3E50',
     wallGradient: 'linear-gradient(180deg, #34495E 0%, #2C3E50 60%, #253545 100%)',
     floorColor: '#6B5A4A',
@@ -115,7 +115,7 @@ export default function RoomShowroom({ imageSrc, productTitle, isOpen, onClose, 
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-100">
           <div>
-            <h3 className="text-lg font-medium text-gray-900">Se på din væg</h3>
+            <h3 className="text-lg font-medium text-gray-900">View on your wall</h3>
             <p className="text-sm text-gray-500">{productTitle}</p>
           </div>
           <button onClick={onClose} className="p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 transition-colors">
